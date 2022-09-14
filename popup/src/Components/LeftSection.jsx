@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Label from "./Label";
 import { BiRupee } from "react-icons/bi";
 import Input from "./Input";
 
 const LeftSection = () => {
+  const [data, setData] = useState({});
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="w-[45%] py-4">
       <h1 className="font-bold text-xl">Enter Discount</h1>
@@ -11,7 +22,7 @@ const LeftSection = () => {
         Select from one of the available Discounting Modes
       </p>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <Label id="mode" value="Discount Mode" />
         <br />
         <select
@@ -31,7 +42,7 @@ const LeftSection = () => {
           <span className="bg-gray-200 border-r-gray-400 p-3">
             <BiRupee />
           </span>
-          <Input />
+          <Input id="amount" onChange={onChange} />
         </div>
         <Label id="net" value="Net Applicable Discount" />
         <br />
@@ -39,7 +50,7 @@ const LeftSection = () => {
           <span className="bg-gray-200 border-r-gray-400 p-3">
             <BiRupee />
           </span>
-          <Input />
+          <Input id="net" onChange={onChange} />
         </div>
         <br />
         <p className="text-[12px] text-gray-600 mb-6">
